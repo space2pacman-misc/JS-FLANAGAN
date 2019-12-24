@@ -1,0 +1,9 @@
+<script>
+	var pattern = /Java/g;
+	var text = "JavaScript - это более забавная штука Java!";
+	var result;
+
+	while((result = pattern.exec(text)) != null) {
+		console.log("Найдено: " + result[0] + " в позиции: " + result.index + "; следующий поиск " + pattern.lastIndex);
+	}
+</script>

@@ -1,0 +1,25 @@
+<script>
+	function trace(o, m) {
+		var original = o[m];
+
+		o[m] = function() {
+			console.log(new Date, "Entering", m);
+			var result = original.apply(this, arguments);
+			console.log(new Date, "Exiting", m);
+			return result;
+		}
+	}
+
+	var o = {};
+
+	o.greeting = function(name) {
+		return "Hello " + name
+	}
+
+	console.log(o.greeting("Alex"));
+
+	trace(o, "greeting");
+
+	console.log(o.greeting("Bob"))
+
+</script>

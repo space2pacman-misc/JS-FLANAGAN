@@ -1,0 +1,22 @@
+<script>
+	function fact(n) {
+		if(n < 0) {
+			throw new Error("Число не может быть отрицательным")
+		}
+
+		if(n == 1) {
+			return 1
+		} else {
+			return n * fact(n-1);
+		}
+	}
+
+	try {
+		var n = Number(prompt("Введите положительный знак"))
+		var f = fact(n);
+		console.log(n + "! = " + f);
+	} 
+	catch(e) {
+		console.log(e);
+	}
+</script>

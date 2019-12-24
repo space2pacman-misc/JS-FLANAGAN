@@ -1,0 +1,18 @@
+<script>
+	function check(arg) {
+		var actual = arg.length;
+		var expected = arg.callee.length;
+
+		if(actual != expected) {
+			throw Error("Неверное количество аргументов");
+		}
+	}
+
+	function f(x,y,z) {
+		check(arguments)
+		//console.log(arguments.callee.length)
+		return x+y+z;
+	}
+
+	console.log(f(2,3,4))
+</script>

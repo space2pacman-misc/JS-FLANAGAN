@@ -1,0 +1,32 @@
+<script>
+	var scope01 = "global";
+	function checkScope01() {
+		var scope01 = "local";
+		return scope01;
+	}
+
+	console.log(checkScope01())
+
+	scope02 = "global"
+	function checkScope02() {
+		scope02 = "local";
+		myscope = "local";
+		return [scope02, myscope];
+	}
+
+	console.log(checkScope02())
+	console.log(myscope)
+
+	var scope03 = "global";
+
+	function checkScope03() {
+		var scope03 = "local";
+		function nested() {
+			var scope03 = "nested";
+			return scope03;
+		}
+		return nested();
+	}
+
+	console.log(checkScope03());
+</script>

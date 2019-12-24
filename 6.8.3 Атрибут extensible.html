@@ -1,0 +1,16 @@
+<script>
+	var o = {x:1};
+	console.log(Object.isExtensible(o)); // true
+	Object.preventExtensions(o);
+	console.log(Object.isExtensible(o)); // false
+	o.y = 1;
+	console.log(o); // {x:1}
+	o.x = 2
+	console.log(o); // {x:2}
+
+	var o2 = {x:1};
+	Object.seal(o2);
+	console.log(Object.isSealed(o2)) // true
+
+	var o3 = Object.seal(Object.create(Object.freeze({x:1}), {y: {value: 2, writable: true}}))
+</script>

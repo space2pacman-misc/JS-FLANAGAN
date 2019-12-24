@@ -1,0 +1,65 @@
+<script>
+	var a01 = [1,2,3,4,5];
+	var a02 = [2,43,5,6,7];
+
+	console.log(a01);
+
+	var sum01 = a01.reduce(function(x,y){
+		//console.log(x,y) 
+		return x+y
+	})
+
+	var sum02 = a01.reduce(function(x,y){
+		//console.log(x,y) 
+		return x+y
+	},2.5)
+
+	var product01 = a01.reduce(function(x,y) {
+		return x*y
+	})
+
+	var max01 = a01.reduce(function(x,y) {
+		return (x>y)?x:y;
+	})
+
+	var max02 = a02.reduce(function(x,y) {
+		return (x>y)?x:y;
+		/*
+		1) 2>43 / f / 43
+		2) 43>5 / t / 43
+		3) 43>6 / t / 43
+		4) 43>7 / t / 43
+		*/
+	})
+
+	console.log(sum01);
+	console.log(sum02);
+	console.log(product01);
+	console.log(max01);
+	console.log(max02);
+
+	var a03 = [2,3,4];
+
+	var big01 = a03.reduceRight(function(x,y) {
+		return Math.pow(x, y)
+	})
+
+	console.log(big01)
+
+	var objects = [{x:1}, {y:2}, {z:3}];
+
+	var mergedLeftToRight = objects.reduce(function(a,b) {
+		a[Object.keys(b)[0]] = b[Object.keys(b)[0]]
+
+		return a
+	})
+
+	var mergedRightToLeft = objects.reduceRight(function(a,b) {
+		a[Object.keys(b)[0]] = b[Object.keys(b)[0]]
+
+		return a
+	})
+
+	console.log(mergedLeftToRight);
+	console.log(mergedRightToLeft);
+</script>

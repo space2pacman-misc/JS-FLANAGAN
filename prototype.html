@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Prototype</title>
+</head>
+<body>
+
+<script>
+	function Point(x,y) {
+		this.x = x;
+		this.y = y;
+	}
+
+	var point = new Point(1,1);
+
+	Point.prototype.dist = function() {
+		return Math.sqrt(this.x * this.x + this.y * this.y);
+	}
+
+	console.log(point.dist())	
+</script>
+
+</body>
+</html>

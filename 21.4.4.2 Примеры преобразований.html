@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Примеры преобразований</title>
+</head>
+<body>
+	<canvas id="field" width="1000" height="1000"></canvas>
+
+	<script>
+		var deg = Math.PI / 180;
+		var canvas = document.querySelector("#field");
+		var ctx = canvas.getContext("2d");
+
+		snowflake(ctx, 0, 5, 115, 125);
+		snowflake(ctx, 1, 145, 115, 125);
+		snowflake(ctx, 2, 285, 115, 125);
+		snowflake(ctx, 3, 425, 115, 125);
+		snowflake(ctx, 4, 565, 115, 125);
+
+		ctx.stroke();
+
+		function snowflake(c, n, x, y, len) {
+			c.save();
+			c.translate(x, y);
+			c.moveTo(0, 0);
+			leg(n);
+			c.rotate(-120 * deg);
+			leg(n);
+			c.rotate(-120 * deg);
+			leg(n);
+			c.closePath();
+			c.restore();
+
+			function leg(n) {
+				c.save();
+
+				if(n === 0) {
+					c.lineTo(len, 0);
+				} else {
+					c.scale(1 / 3, 1 / 3);
+					leg(n - 1);
+					c.rotate(60 * deg);
+					leg(n - 1);
+					c.rotate(-120 * deg);
+					leg(n - 1);
+					c.rotate(60 * deg);
+					leg(n - 1);
+				}
+
+				c.restore();
+				c.translate(len, 0);
+			}
+		}
+	</script>
+</body>
+</html>

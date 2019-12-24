@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Рисование и заливка кривых</title>
+</head>
+<body>
+	
+<canvas id="field" width="1000" height="1000"></canvas>
+
+<script>
+	var canvas = document.querySelector("#field");
+	var ctx = canvas.getContext("2d");
+
+	function rads(x) {
+		return Math.PI * x / 180;
+	}
+
+	ctx.beginPath();
+	ctx.arc(75, 100, 50, 0, rads(360), false);
+
+	ctx.moveTo(200, 100);
+	ctx.arc(200, 100, 50, rads(-60), rads(0), false);
+	ctx.closePath();
+
+	ctx.moveTo(325, 100);
+	ctx.arc(325, 100, 50, rads(-60), rads(0), true);
+	ctx.closePath();
+
+	ctx.moveTo(450, 50);
+	ctx.arcTo(500, 50, 500, 150, 30);
+	ctx.arcTo(500, 150, 400, 150, 20);
+	ctx.arcTo(400, 150, 400, 50, 10);
+	ctx.arcTo(400, 50, 500, 50, 0);
+	ctx.closePath();
+
+	ctx.moveTo(75, 250);
+	ctx.quadraticCurveTo(100, 200, 175, 250);
+	ctx.fillRect(100 - 3, 200 - 3, 6, 6);
+
+	ctx.moveTo(200, 250);
+	ctx.bezierCurveTo(220, 220, 280, 280, 300, 250);
+	ctx.fillRect(220 - 3, 220 - 3, 6, 6);
+	ctx.fillRect(280 - 3, 280 - 3, 6, 6);
+
+	ctx.fillStyle = "#aaa";
+	ctx.lineWidth = 5;
+	ctx.fill();
+	ctx.stroke();
+</script>
+
+</body>
+</html>

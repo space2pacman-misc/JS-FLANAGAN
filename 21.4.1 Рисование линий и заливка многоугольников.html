@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Canvas</title>
+</head>
+<body>
+	
+<canvas width="500px" height="500px"></canvas>
+
+<script>
+	var canvas = document.querySelector("canvas");
+	var ctx = canvas.getContext("2d");
+
+	function polygon(c, n, x, y, r, angle, counterClockWise) {
+		var delta = 2 * Math.PI / n;
+
+		angle = angle || 0;
+		counterClockWise = counterClockWise || false;
+		c.moveTo(x + r * Math.sin(angle), y - r * Math.cos(angle));
+
+		for(var i = 1; i < n; i++) {
+			angle += counterClockWise ? -delta : delta;
+			c.lineTo(x + r * Math.sin(angle), y - r * Math.cos(angle));
+		}
+
+		c.closePath();
+	}
+
+	ctx.beginPath();
+	
+	polygon(ctx, 3, 50, 70, 50);
+	polygon(ctx, 4, 150, 60, 50, Math.PI / 4);
+	polygon(ctx, 5, 255, 55, 50);
+	polygon(ctx, 6, 365, 53, 50, Math.PI / 6);
+	polygon(ctx, 4, 365, 53, 20, Math.PI / 4, true);
+
+	ctx.fillStyle = "#ccc";
+	ctx.strokeStyle = "#008";
+	ctx.lineWidth = 5;
+	ctx.fill();
+	ctx.stroke();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<script>
+	function isArray(arr) {
+		return Array.isArray(arr)
+	}
+
+	function flexsum(a) {
+		var total = 0;
+
+		for(var i = 0; i < arguments.length; i++) {
+			var element = arguments[i];
+			var n;
+			if(element === "null") {
+				continue;
+			}
+
+			if(isArray(element)) {
+				n = flexsum.apply(null, element)
+			} else if(typeof element === "function") {
+				n = element();
+				if(isArray(n)) {
+					n = flexsum.apply(null, n)
+				}
+			} else {
+				n = Number(element);
+			}
+
+			if(isNaN(n)) {
+				throw Error("flexsum(): невозможно преобраовать " + element + " в число");
+			}
+
+			total += n;
+		}
+
+		return total;
+	}
+
+	console.log(flexsum(1,2,3));
+	console.log(flexsum([1,2,3]));
+	console.log(flexsum(function() { return [1,2,3]}))
+	console.log(flexsum(function() { return 10 }))
+</script>

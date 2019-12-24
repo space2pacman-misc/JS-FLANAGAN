@@ -1,0 +1,25 @@
+<script>
+	function memoize(f) {
+		var cache = {};
+
+		return function() {
+			var key = arguments.length + Array.prototype.join.call(arguments, ",");
+			/*
+			1) key = 15
+			2) key = 14
+			3) key = 13
+			4) key = 12
+			5) key = 11
+			6) key = 10
+			*/
+			return cache[key] = f.apply(this, arguments);
+			
+		}
+	}
+
+	var factorial = memoize(function(n) {
+		return n<1 ? 1 : n * factorial(n-1); 
+	})
+
+	console.log(factorial(5));
+</script>

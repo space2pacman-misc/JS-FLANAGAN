@@ -1,0 +1,31 @@
+<script>
+	function f(y) { return this.x + y }
+	var o = {x:1}
+	var g = f.bind(o)
+	//console.log(g(2)) // 3
+
+	var sum = function(x,y) { return x + y }
+	var succ = sum.bind(null, 1);
+	//console.log(succ(2)) // 3
+
+	function f2(y,z) { return this.x + y + z};
+	var g2 = f2.bind(o, 2);
+	//console.log(g2(3)) // 6
+
+	if(!Function.prototype.bind) {
+		Function.prototype.bind = function(o) {
+			var self = this;
+			var argOut = arguments;
+
+			return function() {
+				var args = [];
+				var i;
+
+				for(i = 1; i < argOut.length; i++) args.push(argOut[i]);
+				for(i = 0; i < arguments.length; i++) args.push(arguments[i]);
+
+				return self.apply(o, args);
+			}
+		}
+	}
+</script>

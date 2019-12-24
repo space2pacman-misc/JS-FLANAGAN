@@ -1,0 +1,74 @@
+<script>
+	var obj = {
+		name: "Alex",
+		greeting: function() {
+			return "Hola"
+		}
+	}
+
+	console.log(Object.getOwnPropertyDescriptor(obj, "name")) // {value: "Alex", writable: true, enumerable: true, configurable: true}
+	console.log(Object.getOwnPropertyDescriptor(obj, "greeting")) // {value: ƒ, writable: true, enumerable: true, configurable: true}
+	console.log(Object.getOwnPropertyDescriptor({}, "x")) // undefined
+	console.log(Object.getOwnPropertyDescriptor({}, "toString")) // undefined
+
+	var o = {}
+
+	Object.defineProperty(o, "x", {
+		value: 1,
+		writable: true,
+		enumerable: false,
+		configurable: true
+	})
+
+	console.log(o.x) // 1
+	console.log(Object.keys(o)) // []
+
+	Object.defineProperty(o, "x", { writable: false });
+
+	o.x = 2;
+	console.log(o.x) // 1
+
+	Object.defineProperty(o, "x", { get: function() { return 0 } });
+
+	console.log(o.x); // 0
+
+	var p = Object.defineProperties({}, {
+		x: { value: 1, writable: true, enumerable: true, configurable: true },
+		y: { value: 1, writable: true, enumerable: true, configurable: true },
+		r: {
+			get: function() {
+				return Math.sqrt(this.x*this.x + this.y*this.y);
+			},
+			configurable: true,
+			enumerable: true
+		}
+	})
+
+	console.log(p)
+
+	Object.defineProperty(Object.prototype,
+		"extend",
+		{
+			writable: true,
+			enumerable: false, // Сделать неперечисляемым
+			configurable: true,
+			value: function(o) {
+				// Получитьь названия свойст. Даже неперечисляемые
+				var names = Object.getOwnPropertyNames(o);
+
+				for(var i = 0; i < names.length; i++) {
+					// Пропускать свойста, которые есть в этом объекте
+					if(names[i] in this) continue;
+
+					// Получить дескриптор из объекта
+					var desc = Object.getOwnPropertyDescriptor(o,names[i])
+
+					Object.defineProperty(this, names[i], desc)
+
+				}
+			}
+		})
+
+	var test = Object.extend = p;
+	//console.log(test)
+</script>

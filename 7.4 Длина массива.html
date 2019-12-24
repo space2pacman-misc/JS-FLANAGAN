@@ -1,0 +1,23 @@
+<script>
+	var a = [1,2,3,4,5];
+	var b = [1,2,3,4,5];
+
+	Object.defineProperty(a, "length", {
+		writable: false
+	})
+
+	a.length = 10;
+	console.log(a)
+
+	Object.seal(b);
+	//b.push(10)
+	b[10] = 10
+	b.length = 10
+	console.log(b) // [1, 2, 3, 4, 5, empty × 5]
+	b.length = 5
+	console.log(b) // [1,2,3,4,5]
+
+	Object.freeze(b)
+	b.length = 20
+	console.log(b) // [1,2,3,4,5]
+</script>

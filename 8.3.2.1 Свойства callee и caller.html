@@ -1,0 +1,9 @@
+<script>
+	function a() {
+		console.log(arguments)
+		console.log(arguments.callee)
+		console.log(arguments.caller) // chrome: undefined
+	}
+
+	a();
+</script>

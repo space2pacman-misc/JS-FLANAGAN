@@ -1,0 +1,30 @@
+<script>
+	var o1 = Object.create({x:1,y:2});
+	var o2 = Object.create(null);
+	var o3 = Object.create(Object.prototype);
+
+	console.log(o1); // {}
+	console.log(o1.x); // 1
+	console.log("x" in o1); // true
+
+	console.log(o2); // {} No properties
+
+	console.log(o3); // {}
+
+	// Создает возвращает новые объект рнаследующий свойства объекта в аргументе
+	function inherit(parent) {
+		if(parent == null) throw TypeError();
+		if(Object.create) {
+			return Object.create(parent);
+		}
+		var t = typeof parent;
+		if(t !== "object" && t !== "function") {
+			function f() {
+				f.prototype = parent;
+				return new f();
+			}
+		}
+	}
+
+	console.log(inherit(o1));
+</script>
